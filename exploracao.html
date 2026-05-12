@@ -298,4 +298,17 @@
 <a class="font-bold text-sm text-white hover:text-black transition-colors underline-offset-4 hover:underline" href="#">Contato</a>
 </div>
 </footer>
+        <script>
+  const input = document.querySelector('input[type="text"]');
+  const btnBuscar = document.querySelector('button');
+
+  function buscar() {
+    window.open('fundacao.html', '_blank');
+  }
+
+  btnBuscar?.addEventListener('click', buscar);
+  input?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') buscar();
+  });
+</script>
 </body></html>
