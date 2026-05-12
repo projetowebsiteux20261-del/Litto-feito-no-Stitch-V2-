@@ -13,12 +13,12 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey:            "SUA_API_KEY_AQUI",
-  authDomain:        "SEU_PROJETO.firebaseapp.com",
-  projectId:         "SEU_PROJETO",
-  storageBucket:     "SEU_PROJETO.appspot.com",
-  messagingSenderId: "SEU_MESSAGING_SENDER_ID",
-  appId:             "SEU_APP_ID"
+  apiKey:            "AIzaSyCQQ-EqBv7XwmGX4FzIikMv4yd2UN_xKTc",
+  authDomain:        "litto-stitch.firebaseapp.com",
+  projectId:         "litto-stitch",
+  storageBucket:     "litto-stitch.firebasestorage.app",
+  messagingSenderId: "S420322820288",
+  appId:             "1:420322820288:web:a25fb17b7e6a9223126d25"
 };
 
 const app  = initializeApp(firebaseConfig);
