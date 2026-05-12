@@ -26,11 +26,12 @@
   <header id="site-header" role="banner">
     <button class="header-logo" data-nav="home" aria-label="Litto – página inicial">Litto</button>
 
-    <nav class="header-nav" aria-label="Navegação principal">
-      <a data-nav="home"   role="button" tabindex="0">Início</a>
-      <a data-nav="mapa"   role="button" tabindex="0">Bibliotecas</a>
-      <a data-nav="perfil" role="button" tabindex="0">Perfil</a>
-    </nav>
+<nav class="header-nav" aria-label="Navegação principal">
+  <a data-nav="home"   role="button" tabindex="0">Início</a>
+  <a data-nav="mapa"   role="button" tabindex="0">Bibliotecas</a>
+  <a onclick="window.open('explorar.html','_blank')" role="button" tabindex="0" style="cursor:pointer;">Explorar</a>
+  <a data-nav="perfil" role="button" tabindex="0">Perfil</a>
+</nav>
 
     <div class="header-actions">
       <button id="header-cadastro-btn" class="btn-primary btn-sm" data-nav="cadastro" aria-label="Criar conta">Cadastro</button>
