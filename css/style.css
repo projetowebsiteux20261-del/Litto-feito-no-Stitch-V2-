@@ -1036,6 +1036,11 @@ body {
 #screen-explorar footer,
 #screen-bibliotecas-digitais footer,
 #screen-fundacao footer {
-  margin-bottom: calc(var(--footer-h) + 20px);
+  margin-bottom: 0;
+  border: 2px solid #000;
+  border-left: none;
+  border-right: none;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 }
