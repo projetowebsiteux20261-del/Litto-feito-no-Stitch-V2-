@@ -47,48 +47,43 @@ function adicionarMarcadores(mapa) {
 // ─── Mapa completo (tela Bibliotecas) ───────────────────────
 let mapaCompleto = null;
 
+// Substitua as funções initMap e initMapHome por:
+
 export function initMap() {
   const container = document.getElementById("map");
   if (!container) return;
 
   if (mapaCompleto) {
-    mapaCompleto.invalidateSize();
-    return;
+    mapaCompleto.remove(); // destrói instância anterior
+    mapaCompleto = null;
   }
 
   mapaCompleto = L.map("map", { center: [-23.5505, -46.6333], zoom: 12 });
-
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     maxZoom: 19,
   }).addTo(mapaCompleto);
-
   adicionarMarcadores(mapaCompleto);
 }
-
-// ─── Mini-mapa da home ───────────────────────────────────────
-let mapaHome = null;
 
 export function initMapHome() {
   const container = document.getElementById("map-home");
   if (!container) return;
 
   if (mapaHome) {
-    mapaHome.invalidateSize();
-    return;
+    mapaHome.remove();
+    mapaHome = null;
   }
 
   mapaHome = L.map("map-home", {
     center: [-23.5505, -46.6333],
     zoom: 11,
     zoomControl: true,
-    scrollWheelZoom: false, // desativa scroll no mini-mapa para não atrapalhar a página
+    scrollWheelZoom: false,
   });
-
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     maxZoom: 19,
   }).addTo(mapaHome);
-
   adicionarMarcadores(mapaHome);
 }
