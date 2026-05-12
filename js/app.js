@@ -299,3 +299,19 @@ document.querySelectorAll(".tabs").forEach(grupo => {
     });
   });
 });
+// ─── Pesquisa ────────────────────────────────────────────────
+const heroSearch = document.getElementById("hero-search");
+const btnSearch  = document.querySelector(".btn-search");
+
+function executarBusca() {
+  const termo = heroSearch?.value.trim();
+  if (!termo) return;
+  // Por enquanto loga; substitua pela sua lógica real:
+  console.log("Buscando por:", termo);
+  alert(`Buscando por: "${termo}"`); // troque por sua lógica de resultados
+}
+
+btnSearch?.addEventListener("click", executarBusca);
+heroSearch?.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") executarBusca();
+});
