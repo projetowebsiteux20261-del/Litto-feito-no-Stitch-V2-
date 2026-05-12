@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Litto – Clube do Livro</title>
+  <meta name="description" content="Litto – descubra sua próxima história favorita. Onde a literatura se encontra com o cinema e o streaming." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div id="app">
+
+  <!-- Overlay enquanto Firebase resolve auth -->
+  <div id="loading-overlay" aria-live="polite" aria-label="Carregando...">
+    <span class="material-symbols-outlined loading-icon">menu_book</span>
+    <p>Carregando…</p>
+  </div>
+
+  <!-- ===== HEADER FIXO ===== -->
+  <header id="site-header" role="banner">
+    <button class="header-logo" data-nav="home" aria-label="Litto – página inicial">Litto</button>
+
+    <nav class="header-nav" aria-label="Navegação principal">
+      <a data-nav="home"   role="button" tabindex="0">Início</a>
+      <a data-nav="mapa"   role="button" tabindex="0">Bibliotecas</a>
+      <a data-nav="perfil" role="button" tabindex="0">Perfil</a>
+    </nav>
+
+    <div class="header-actions">
+      <button id="header-cadastro-btn" class="btn-primary btn-sm" data-nav="cadastro" aria-label="Criar conta">Cadastro</button>
+      <button id="header-avatar" class="avatar-btn" data-nav="perfil" aria-label="Ver perfil" style="display:none;">
+        <span id="avatar-initial" class="material-symbols-outlined" style="font-size:1.2rem;">person</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== CONTEÚDO PRINCIPAL ===== -->
+  <main id="main-content" role="main">
+
+    <!-- ============================================================
+         TELA: HOME — Landing page (igual ao design original do Stitch)
+         Sem conteúdo de perfil aqui.
+    ============================================================ -->
+    <section id="screen-home" class="screen" aria-label="Página inicial">
+
+      <!-- Hero -->
+      <div class="hero-landing">
+        <div class="floating-shape" style="top:2.5rem;left:2.5rem;width:8rem;height:8rem;background:var(--secondary);border-radius:50%;border:2px solid #000;opacity:0.85;transform:rotate(12deg);" aria-hidden="true"></div>
+        <div class="floating-shape" style="bottom:5rem;right:2.5rem;width:6rem;height:6rem;background:var(--primary);border:2px solid #000;opacity:0.85;transform:rotate(-12deg);" aria-hidden="true"></div>
+        <div class="floating-shape" style="top:25%;right:25%;width:4rem;height:4rem;background:#fff;border:2px solid #000;opacity:0.5;transform:rotate(45deg);" aria-hidden="true"></div>
+        <div class="hero-landing-inner">
+          <h1 class="hero-title-giant">Litto</h1>
+          <h2 class="hero-subtitle">Descubra sua próxima história favorita.</h2>
+          <div class="search-bar" role="search">
+            <div class="search-input-wrap">
+              <input type="text" id="hero-search"
+                placeholder="Qual história você quer viver hoje?"
+                aria-label="Buscar livros, filmes ou séries" />
+            </div>
+            <button class="btn-search" aria-label="Explorar">
+              <span class="material-symbols-outlined" aria-hidden="true">search</span>
+              Explorar
+            </button>
+          </div>
+          <p class="hero-tagline">Onde a literatura se encontra com o cinema e o streaming.</p>
+        </div>
+      </div>
+
+      <!-- Benefícios -->
+      <div class="benefits-section">
+        <div class="benefits-inner">
+          <h2 class="section-title" style="color:#fff;text-align:center;margin-bottom:3rem;">Por que ler com a Litto?</h2>
+          <div class="benefits-grid">
+            <article class="benefit-card" style="box-shadow:8px 8px 0px 0px #fe4c00;">
+              <div class="benefit-icon" style="background:var(--tertiary);">
+                <span class="material-symbols-outlined" aria-hidden="true">movie</span>
+              </div>
+              <h3 class="benefit-title">Das Telas para as Páginas</h3>
+              <p class="benefit-body">Conectamos os sucessos do cinema e das séries com as obras literárias que os inspiraram, aprofundando sua experiência.</p>
+            </article>
+            <article class="benefit-card" style="box-shadow:8px 8px 0px 0px #5065ff;">
+              <div class="benefit-icon" style="background:var(--primary);">
+                <span class="material-symbols-outlined" aria-hidden="true">menu_book</span>
+              </div>
+              <h3 class="benefit-title">Curadoria Especializada</h3>
+              <p class="benefit-body">Nossa equipe seleciona títulos que dialogam com a cultura pop atual, garantindo que você esteja sempre por dentro.</p>
+            </article>
+            <article class="benefit-card" style="box-shadow:8px 8px 0px 0px #ffdf2b;">
+              <div class="benefit-icon" style="background:var(--text);">
+                <span class="material-symbols-outlined" aria-hidden="true">diversity_3</span>
+              </div>
+              <h3 class="benefit-title">Clube de Comunidade</h3>
+              <p class="benefit-body">Participe de discussões profundas com leitores que compartilham sua paixão por histórias transformadoras.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <!-- Curiosidade literária -->
+      <div class="curiosity-section">
+        <div class="curiosity-inner">
+          <div class="curiosity-visual" aria-hidden="true">
+            <div class="curiosity-img-wrap">
+              <span class="material-symbols-outlined curiosity-bg-icon">auto_stories</span>
+              <div class="curiosity-badge">
+                <span class="material-symbols-outlined" style="font-size:7rem;color:var(--text);">castle</span>
+              </div>
+            </div>
+          </div>
+          <div class="curiosity-text">
+            <span class="tag-badge" style="background:var(--secondary);color:var(--text);margin-bottom:1rem;display:inline-block;">VOCÊ SABIA?</span>
+            <h2 class="section-title" style="color:#fff;margin-bottom:1rem;">O Senhor dos Anéis</h2>
+            <p style="color:rgba(255,255,255,0.9);font-weight:500;font-size:1rem;line-height:1.7;margin-bottom:2rem;">
+              J.R.R. Tolkien escreveu a trilogia como uma única obra gigante. A adaptação de Peter Jackson é considerada uma das mais fiéis da literatura para o cinema, com mais de 17 indicações ao Oscar.
+            </p>
+            <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+              <button class="btn-primary" data-nav="mapa">Ver Bibliotecas</button>
+              <button class="btn-secondary-inv" data-nav="cadastro">Criar Conta</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sugestões por gênero -->
+      <div style="background:var(--bg);padding:4rem 5%;">
+        <div style="max-width:1200px;margin:0 auto;">
+          <h2 class="section-title" style="margin-bottom:2rem;">Sugestões para sua Estante</h2>
+          <div class="genres-grid">
+            <div class="genre-card" style="background:var(--tertiary);color:#fff;" tabindex="0" role="button" aria-label="Fantasia épica">
+              <span class="material-symbols-outlined genre-icon" aria-hidden="true">castle</span>
+              <p class="genre-label">FANTASIA ÉPICA</p>
+            </div>
+            <div class="genre-card" style="background:var(--primary);color:#fff;" tabindex="0" role="button" aria-label="Sci-Fi clássico">
+              <span class="material-symbols-outlined genre-icon" aria-hidden="true">rocket_launch</span>
+              <p class="genre-label">SCI-FI CLASSIC</p>
+            </div>
+            <div class="genre-card" style="background:var(--secondary);color:var(--text);" tabindex="0" role="button" aria-label="Romance histórico">
+              <span class="material-symbols-outlined genre-icon" aria-hidden="true">history_edu</span>
+              <p class="genre-label">ROMANCE HISTÓRICO</p>
+            </div>
+            <div class="genre-card" style="background:var(--surface);color:var(--text);border:2px solid var(--border);" tabindex="0" role="button" aria-label="Policial e mistério">
+              <span class="material-symbols-outlined genre-icon" style="color:var(--tertiary);" aria-hidden="true">detector</span>
+              <p class="genre-label">POLICIAL &amp; MISTÉRIO</p>
+            </div>
+            <div class="genre-card" style="background:var(--tertiary);color:#fff;" tabindex="0" role="button" aria-label="Natureza e ensaio">
+              <span class="material-symbols-outlined genre-icon" aria-hidden="true">emoji_nature</span>
+              <p class="genre-label">NATUREZA &amp; ENSAIO</p>
+            </div>
+            <div class="genre-card" style="background:var(--primary);color:#fff;" tabindex="0" role="button" aria-label="Filosofia moderna">
+              <span class="material-symbols-outlined genre-icon" aria-hidden="true">psychology_alt</span>
+              <p class="genre-label">FILOSOFIA MODERNA</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bibliotecas em SP + mini-mapa -->
+      <div class="libraries-home-section">
+        <div class="libraries-home-inner">
+          <div class="libraries-home-text">
+            <h2 class="section-title" style="margin-bottom:1rem;">Bibliotecas em São Paulo</h2>
+            <p style="font-weight:500;color:rgba(26,27,36,0.8);margin-bottom:2rem;line-height:1.7;">
+              Encontre o lugar perfeito para sua próxima leitura. Espaços que abrigam eventos literários e exposições culturais.
+            </p>
+            <div class="lib-list">
+              <div class="lib-list-item" style="box-shadow:4px 4px 0px 0px #5065ff;">
+                <h4>Biblioteca Mário de Andrade</h4>
+                <p>R. da Consolação, 94 – República</p>
+              </div>
+              <div class="lib-list-item" style="box-shadow:4px 4px 0px 0px #fe4c00;">
+                <h4>Biblioteca de São Paulo</h4>
+                <p>Av. Cruzeiro do Sul, 2630 – Santana</p>
+              </div>
+              <div class="lib-list-item" style="box-shadow:4px 4px 0px 0px #5065ff;">
+                <h4>Centro Cultural São Paulo</h4>
+                <p>R. Vergueiro, 1000 – Paraíso</p>
+              </div>
+            </div>
+            <button class="btn-primary" data-nav="mapa" style="margin-top:1.5rem;">
+              <span class="material-symbols-outlined" aria-hidden="true">map</span> Ver Mapa Completo
+            </button>
+          </div>
+          <div class="libraries-home-map" role="region" aria-label="Mapa de prévia das bibliotecas">
+            <div id="map-home"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feedback -->
+      <div class="feedback-section">
+        <div class="feedback-deco1" aria-hidden="true"></div>
+        <div class="feedback-deco2" aria-hidden="true"></div>
+        <div class="feedback-card">
+          <div class="feedback-deco3" aria-hidden="true"></div>
+          <div class="feedback-inner">
+            <h2 class="section-title" style="color:#fff;margin-bottom:0.5rem;">Sugestões ou Feedback?</h2>
+            <p style="color:rgba(255,255,255,0.85);font-weight:500;margin-bottom:2rem;">Ajude-nos a conectar melhor as histórias que você lê com as que você assiste.</p>
+            <form id="form-feedback" novalidate>
+              <div class="feedback-grid">
+                <div class="form-group">
+                  <label for="fb-nome" style="color:#fff;">Nome Completo</label>
+                  <input type="text" id="fb-nome" placeholder="Como te chamamos?" autocomplete="name" />
+                </div>
+                <div class="form-group">
+                  <label for="fb-email" style="color:#fff;">E-mail</label>
+                  <input type="email" id="fb-email" placeholder="seu@email.com" autocomplete="email" />
+                </div>
+              </div>
+              <div class="form-group" style="margin-top:1rem;">
+                <label for="fb-msg" style="color:#fff;">Sua Mensagem</label>
+                <textarea id="fb-msg" rows="4" placeholder="Conte-nos sua ideia…"
+                  style="width:100%;padding:0.85rem;border:2px solid #000;font-family:'Poppins',sans-serif;font-size:0.95rem;outline:none;background:#fff;resize:vertical;"></textarea>
+              </div>
+              <button type="submit" class="btn-primary" style="margin-top:1rem;background:var(--tertiary);box-shadow:6px 6px 0px 0px #ffdf2b;">
+                Enviar Feedback
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rodapé da home -->
+      <footer class="site-footer" role="contentinfo">
+        <div>
+          <span class="footer-logo">Litto Book Club.</span>
+          <p class="footer-copy">© 2026 Litto Book Club. Cultivando histórias e adaptações.</p>
+        </div>
+        <div class="footer-links">
+          <span>Sobre</span>
+          <span>Contato</span>
+        </div>
+      </footer>
+
+    </section><!-- /screen-home -->
+
+    <!-- ============================================================
+         TELA: MAPA — Mapa completo de bibliotecas públicas de SP
+    ============================================================ -->
+    <section id="screen-mapa" class="screen" aria-label="Mapa de bibliotecas públicas de São Paulo">
+      <div class="page-wrapper">
+        <div class="section-header">
+          <span class="material-symbols-outlined section-icon" style="color:var(--tertiary);" aria-hidden="true">map</span>
+          <h2 class="section-title">Bibliotecas Públicas – São Paulo</h2>
+        </div>
+        <p style="margin-bottom:1.5rem;font-weight:500;color:#444;">
+          Explore as bibliotecas públicas da cidade. Clique nos marcadores para ver nome e endereço.
+        </p>
+        <div id="mapa-wrapper" role="region" aria-label="Mapa interativo de bibliotecas">
+          <div id="map"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         TELA: PERFIL — Dados do usuário logado
+         (só aparece se o usuário estiver autenticado)
+    ============================================================ -->
+    <section id="screen-perfil" class="screen" aria-label="Perfil do usuário">
+      <div class="page-wrapper">
+
+        <div class="hero-section" role="region" aria-label="Dados do perfil">
+          <div class="hero-avatar" aria-hidden="true">
+            <span class="material-symbols-outlined" style="font-size:5rem;">person</span>
+          </div>
+          <div class="hero-info">
+            <h1 class="hero-name" id="perfil-nome">–</h1>
+            <p class="hero-handle" id="perfil-handle"></p>
+            <div class="hero-actions">
+              <button class="btn-primary" aria-label="Editar perfil">
+                <span class="material-symbols-outlined" aria-hidden="true">edit</span> Editar Perfil
+              </button>
+              <button id="btn-logout" class="btn-secondary" aria-label="Sair da conta">
+                <span class="material-symbols-outlined" aria-hidden="true">logout</span> Sair
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <section style="margin-bottom:3rem;" aria-labelledby="stats-h">
+          <h2 id="stats-h" class="section-title" style="margin-bottom:1.25rem;">Estatísticas</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;" role="list">
+            <div class="bk-card" style="padding:1.25rem;text-align:center;" role="listitem">
+              <p style="font-size:2rem;font-weight:900;color:var(--tertiary);">47</p>
+              <p style="font-size:0.8rem;font-weight:700;">Livros Lidos</p>
+            </div>
+            <div class="bk-card" style="padding:1.25rem;text-align:center;" role="listitem">
+              <p style="font-size:2rem;font-weight:900;color:var(--primary);">12</p>
+              <p style="font-size:0.8rem;font-weight:700;">Avaliações</p>
+            </div>
+            <div class="bk-card" style="padding:1.25rem;text-align:center;" role="listitem">
+              <p style="font-size:2rem;font-weight:900;color:var(--text);">8</p>
+              <p style="font-size:0.8rem;font-weight:700;">Recomendações</p>
+            </div>
+            <div class="bk-card" style="padding:1.25rem;text-align:center;" role="listitem">
+              <p style="font-size:2rem;font-weight:900;color:var(--tertiary);">23</p>
+              <p style="font-size:0.8rem;font-weight:700;">Quero Ler</p>
+            </div>
+          </div>
+        </section>
+
+        <section style="margin-bottom:3rem;" aria-labelledby="estante-h">
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:1rem;margin-bottom:1.5rem;">
+            <div class="section-header" style="margin-bottom:0;">
+              <span class="material-symbols-outlined section-icon" style="color:var(--secondary);" aria-hidden="true">book_4</span>
+              <h2 id="estante-h" class="section-title">Minha Estante</h2>
+            </div>
+            <div class="tabs" role="tablist" aria-label="Filtro da estante">
+              <button class="tab-btn active" role="tab" aria-selected="true">LIDOS</button>
+              <button class="tab-btn" role="tab" aria-selected="false">QUERO LER</button>
+            </div>
+          </div>
+          <div class="shelf-grid" role="list">
+            <div class="bk-card" role="listitem">
+              <div class="book-spine" style="background:var(--tertiary);">
+                <span class="material-symbols-outlined" style="font-size:2.5rem;color:#fff;" aria-hidden="true">menu_book</span>
+              </div>
+              <div style="padding:0.75rem;">
+                <h4 style="font-weight:700;font-size:0.875rem;">Fundação e Império</h4>
+                <p style="font-size:0.75rem;color:#555;margin-top:0.2rem;">Isaac Asimov</p>
+              </div>
+            </div>
+            <div class="bk-card" role="listitem">
+              <div class="book-spine" style="background:var(--primary);">
+                <span class="material-symbols-outlined" style="font-size:2.5rem;color:#fff;" aria-hidden="true">book</span>
+              </div>
+              <div style="padding:0.75rem;">
+                <h4 style="font-weight:700;font-size:0.875rem;">Neuromancer</h4>
+                <p style="font-size:0.75rem;color:#555;margin-top:0.2rem;">William Gibson</p>
+              </div>
+            </div>
+            <div class="bk-card" role="listitem">
+              <div class="book-spine" style="background:var(--secondary);">
+                <span class="material-symbols-outlined" style="font-size:2.5rem;color:#1a1b24;" aria-hidden="true">library_books</span>
+              </div>
+              <div style="padding:0.75rem;">
+                <h4 style="font-weight:700;font-size:0.875rem;">O Fim da Infância</h4>
+                <p style="font-size:0.75rem;color:#555;margin-top:0.2rem;">Arthur C. Clarke</p>
+              </div>
+            </div>
+            <div class="bk-card" role="listitem">
+              <div class="book-spine" style="background:var(--tertiary);">
+                <span class="material-symbols-outlined" style="font-size:2.5rem;color:#fff;" aria-hidden="true">import_contacts</span>
+              </div>
+              <div style="padding:0.75rem;">
+                <h4 style="font-weight:700;font-size:0.875rem;">1984</h4>
+                <p style="font-size:0.75rem;color:#555;margin-top:0.2rem;">George Orwell</p>
+              </div>
+            </div>
+            <button class="bk-card"
+              style="border-style:dashed;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;cursor:pointer;aspect-ratio:2/3;background:var(--surface);"
+              aria-label="Adicionar novo livro à estante">
+              <span class="material-symbols-outlined" style="font-size:2.5rem;" aria-hidden="true">add_circle</span>
+              <span style="font-weight:900;margin-top:0.5rem;font-size:0.8rem;">ADICIONAR</span>
+            </button>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         TELA: LOGIN
+    ============================================================ -->
+    <section id="screen-login" class="screen" aria-label="Tela de login">
+      <div class="form-card">
+        <h1 class="form-title">Entrar</h1>
+        <p class="form-subtitle">Bem-vindo de volta! Acesse sua conta Litto.</p>
+        <div id="login-alert" class="alert-message" role="alert" aria-live="polite"></div>
+        <form id="form-login" novalidate>
+          <div class="form-group">
+            <label for="login-email">E-mail</label>
+            <input type="email" id="login-email" placeholder="seu@email.com"
+              autocomplete="email" required aria-describedby="err-login-email" />
+            <p class="field-error" id="err-login-email" role="alert"></p>
+          </div>
+          <div class="form-group">
+            <label for="login-senha">Senha</label>
+            <input type="password" id="login-senha" placeholder="Sua senha"
+              autocomplete="current-password" required aria-describedby="err-login-senha" />
+            <p class="field-error" id="err-login-senha" role="alert"></p>
+          </div>
+          <button type="submit" class="form-btn">Entrar</button>
+        </form>
+        <p class="form-link">
+          Ainda não tem conta? <button data-nav="cadastro">Cadastre-se</button>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         TELA: CADASTRO
+    ============================================================ -->
+    <section id="screen-cadastro" class="screen" aria-label="Tela de cadastro">
+      <div class="form-card">
+        <h1 class="form-title">Cadastre-se</h1>
+        <p class="form-subtitle">Crie sua conta e comece a explorar o mundo dos livros.</p>
+        <div id="cadastro-alert" class="alert-message" role="alert" aria-live="polite"></div>
+        <form id="form-cadastro" novalidate>
+          <div class="form-group">
+            <label for="cad-nome">Nome completo</label>
+            <input type="text" id="cad-nome" placeholder="Seu nome completo"
+              autocomplete="name" required aria-describedby="err-nome" />
+            <p class="field-error" id="err-nome" role="alert"></p>
+          </div>
+          <div class="form-group">
+            <label for="cad-email">E-mail</label>
+            <input type="email" id="cad-email" placeholder="seu@email.com"
+              autocomplete="email" required aria-describedby="err-email" />
+            <p class="field-error" id="err-email" role="alert"></p>
+          </div>
+          <div class="form-group">
+            <label for="cad-senha">Senha</label>
+            <input type="password" id="cad-senha" placeholder="Mínimo 6 caracteres"
+              autocomplete="new-password" required minlength="6" aria-describedby="err-senha" />
+            <p class="field-error" id="err-senha" role="alert"></p>
+          </div>
+          <div class="form-group">
+            <label for="cad-conf-senha">Confirmar senha</label>
+            <input type="password" id="cad-conf-senha" placeholder="Repita a senha"
+              autocomplete="new-password" required aria-describedby="err-conf" />
+            <p class="field-error" id="err-conf" role="alert"></p>
+          </div>
+          <button type="submit" class="form-btn">Cadastrar</button>
+        </form>
+        <p class="form-link">
+          Já tem uma conta? <button data-nav="login">Entrar</button>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== BOTTOM NAV FIXO ===== -->
+  <nav id="bottom-nav" aria-label="Navegação por abas">
+    <button class="bottom-nav-btn" data-nav="home" aria-label="Início">
+      <span class="material-symbols-outlined" aria-hidden="true">home</span>
+      Início
+    </button>
+    <button class="bottom-nav-btn" data-nav="mapa" aria-label="Mapa de bibliotecas">
+      <span class="material-symbols-outlined" aria-hidden="true">map</span>
+      Mapa
+    </button>
+    <button class="bottom-nav-btn" data-nav="perfil" aria-label="Perfil">
+      <span class="material-symbols-outlined" aria-hidden="true">person</span>
+      Perfil
+    </button>
+    <button class="bottom-nav-btn" data-nav="login" id="bottom-nav-login" aria-label="Entrar">
+      <span class="material-symbols-outlined" aria-hidden="true">login</span>
+      Entrar
+    </button>
+  </nav>
+
+</div><!-- /#app -->
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLtE=" crossorigin=""></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
