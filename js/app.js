@@ -18,12 +18,30 @@ let currentUser = null;
 
 // ─── Referências de telas ────────────────────────────────────
 const screens = {
-  home:     document.getElementById("screen-home"),
-  mapa:     document.getElementById("screen-mapa"),
-  perfil:   document.getElementById("screen-perfil"),
-  login:    document.getElementById("screen-login"),
-  cadastro: document.getElementById("screen-cadastro"),
+  home:                 document.getElementById("screen-home"),
+  mapa:                 document.getElementById("screen-mapa"),
+  perfil:               document.getElementById("screen-perfil"),
+  login:                document.getElementById("screen-login"),
+  cadastro:             document.getElementById("screen-cadastro"),
+  explorar:             document.getElementById("screen-explorar"),
+  "bibliotecas-digitais": document.getElementById("screen-bibliotecas-digitais"),
+  fundacao:             document.getElementById("screen-fundacao"),
 };
+
+// ─── Pesquisa (home e explorar) ──────────────────────────────
+function executarBusca() {
+  showScreen("fundacao");
+}
+
+document.getElementById("hero-search")?.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") executarBusca();
+});
+document.querySelector(".btn-search")?.addEventListener("click", executarBusca);
+
+document.getElementById("explorar-search")?.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") executarBusca();
+});
+document.getElementById("explorar-buscar")?.addEventListener("click", executarBusca);
 
 const navLinks = document.querySelectorAll("[data-nav]");
 
