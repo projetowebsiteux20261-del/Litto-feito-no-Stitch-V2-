@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-highest": "#f7ddd4",
+                        "surface-dim": "#eed5cb",
+                        "tertiary-fixed": "#cae6ff",
+                        "on-error": "#ffffff",
+                        "on-background": "#261913",
+                        "surface-container-low": "#fff1ec",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#351000",
+                        "tertiary": "#006492",
+                        "on-tertiary-container": "#003652",
+                        "surface-container": "#ffe9e1",
+                        "secondary": "#914b27",
+                        "outline-variant": "#e1c0b2",
+                        "on-tertiary-fixed-variant": "#004b6f",
+                        "primary-fixed-dim": "#ffb694",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "primary": "#a14000",
+                        "outline": "#8d7165",
+                        "on-primary-container": "#5b2100",
+                        "surface-variant": "#f7ddd4",
+                        "inverse-primary": "#ffb694",
+                        "surface-tint": "#a14000",
+                        "inverse-on-surface": "#ffede7",
+                        "tertiary-container": "#00a4ec",
+                        "on-surface": "#261913",
+                        "secondary-container": "#fda378",
+                        "on-primary-fixed-variant": "#7b2f00",
+                        "surface-bright": "#fff8f6",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#fde3d9",
+                        "on-tertiary-fixed": "#001e2f",
+                        "on-secondary-fixed-variant": "#743512",
+                        "surface": "#fff8f6",
+                        "primary-fixed": "#ffdbcc",
+                        "on-surface-variant": "#594237",
+                        "on-primary-fixed": "#351000",
+                        "secondary-fixed": "#ffdbcc",
+                        "on-secondary-container": "#773714",
+                        "error": "#ba1a1a",
+                        "primary-container": "#fd711e",
+                        "inverse-surface": "#3c2d27",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#ffb694",
+                        "background": "#fff8f6",
+                        "tertiary-fixed-dim": "#8cceff",
+                        "blue": "#5065ff",
+                        "orange": "#fe4c00",
+                        "yellow": "#ffdf2b"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "margin": "24px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "nav-height": "80px"
+                    },
+                    fontFamily: {
+                        "poppins": ["Poppins", "sans-serif"],
+                        "label-md": ["Poppins"],
+                        "headline-md": ["Poppins"],
+                        "body-md": ["Poppins"],
+                        "headline-lg": ["Poppins"],
+                        "body-lg": ["Poppins"]
+                    },
+                    fontSize: {
+                        "label-md": ["12px", {"lineHeight": "1", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                },
+            },
+        };
+    </script>
+<style>
+        body { font-family: 'Poppins', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        
+        .form-card {
+            background: white;
+            border: 2px solid black;
+            box-shadow: 12px 12px 0px 0px rgba(0,0,0,1);
+            transition: transform 0.2s ease;
+        }
+        .dark .form-card {
+            background: #261913;
+            border-color: #e1c0b2;
+            box-shadow: 12px 12px 0px 0px rgba(255,255,255,0.1);
+        }
+
+        .bk-card {
+            border: 2px solid black;
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+            transition: all 0.2s ease;
+        }
+        .bk-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 8px 8px 0px 0px rgba(0,0,0,1);
+        }
+        .dark .bk-card { border-color: #e1c0b2; box-shadow: 4px 4px 0px 0px rgba(255,255,255,0.1); }
+
+        .btn-cta {
+            background: #5065ff;
+            color: white;
+            border: 2px solid black;
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+            font-weight: 800;
+            transition: all 0.2s ease;
+        }
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 6px 6px 0px 0px rgba(0,0,0,1);
+        }
+
+        .urec {
+            border: 2px solid black;
+            padding: 1.5rem;
+            box-shadow: 6px 6px 0px 0px rgba(0,0,0,1);
+        }
+        .dark .urec { border-color: #e1c0b2; box-shadow: 6px 6px 0px 0px rgba(255,255,255,0.1); }
+
+        .shapes {
+            position: absolute;
+            z-index: -1;
+            filter: blur(60px);
+            opacity: 0.5;
+        }
+
+        .book-icon-container {
+            aspect-ratio: 2/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid black;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .book-icon-container::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: linear-gradient(45deg, transparent 20%, rgba(255,255,255,0.2) 50%, transparent 80%);
+            animation: shine 3s infinite linear;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%); }
+            100% { transform: translateX(100%) translateY(100%); }
+        }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #fbf8ff; }
+        ::-webkit-scrollbar-thumb { background: #5065ff; border: 2px solid #000; }
+        
+        .dark ::-webkit-scrollbar-track { background: #261913; }
+    </style>
+</head>
+<body class="bg-background dark:bg-on-background text-on-surface dark:text-inverse-on-surface min-h-screen transition-colors duration-300 font-poppins"><div class="fixed top-0 left-0 w-full z-[60] bg-yellow text-black text-center py-2 px-4 font-poppins font-bold text-[14px] border-b-2 border-on-background" id="dev-notice-bar">
+    Essa página é uma amostra, o site ainda está em desenvolvimento
+</div>
+<!-- Navbar -->
+<header class="fixed w-full z-50 flex justify-between items-center px-[5%] h-20 bg-surface dark:bg-on-background border-b-2 border-on-background dark:border-inverse-on-surface shadow-[0px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[0px_4px_0px_0px_rgba(255,255,255,0.1)] top-[38px]">
+<div class="flex items-center gap-8">
+<span class="text-3xl font-black italic tracking-tighter text-blue dark:text-tertiary-container">Litto</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-on-background dark:text-inverse-on-surface font-bold hover:-translate-y-0.5 transition-transform duration-200" href="#">Início</a>
+<a class="text-on-background dark:text-inverse-on-surface font-bold hover:-translate-y-0.5 transition-transform duration-200" href="#">Bibliotecas</a>
+<a class="text-on-background dark:text-inverse-on-surface font-bold hover:-translate-y-0.5 transition-transform duration-200" href="#">Explorar</a>
+<a class="text-on-background dark:text-inverse-on-surface font-bold hover:-translate-y-0.5 transition-transform duration-200" href="#">Perfil</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<a class="hidden sm:block text-on-background dark:text-inverse-on-surface font-bold hover:underline" href="#">Cadastro</a>
+<button class="bg-blue text-white px-6 py-2 border-2 border-on-background font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-all">Entrar</button>
+</div>
+</header>
+<main class="px-[5%] pb-20 relative overflow-hidden pt-[158px]">
+<!-- Animated Background Shapes -->
+<div class="shapes top-20 -left-20 w-[600px] h-[600px] bg-blue/20 dark:bg-tertiary/20 rounded-full animate-pulse"></div>
+<div class="shapes bottom-0 -right-20 w-[700px] h-[700px] bg-orange/15 dark:bg-primary/10 rounded-full animate-bounce" style="animation-duration: 15s;"></div>
+<!-- Hero Section -->
+<section class="max-w-6xl mx-auto mb-32">
+<div class="form-card p-8 md:p-12 flex flex-col md:flex-row gap-12 items-start bg-surface-container-lowest dark:bg-on-background">
+<div class="w-full md:w-1/3 shrink-0">
+<div class="book-icon-container bg-blue dark:bg-tertiary border-4 border-on-background dark:border-inverse-on-surface shadow-[16px_16px_0px_0px_#fe4c00]">
+<span class="material-symbols-outlined text-white text-8xl" style="font-variation-settings: 'FILL' 1, 'wght' 700">auto_stories</span>
+</div>
+</div>
+<div class="flex-1 space-y-6">
+<div>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="bg-yellow px-3 py-1 text-black font-black text-xs uppercase border-2 border-black inline-block">Sci-Fi Clássico</span>
+<span class="bg-blue px-3 py-1 text-white font-black text-xs uppercase border-2 border-black inline-block">Distopia</span>
+<span class="bg-orange px-3 py-1 text-white font-black text-xs uppercase border-2 border-black inline-block">Ficção Científica</span>
+</div>
+<h1 class="text-6xl font-extrabold leading-none tracking-tight mb-2 dark:text-inverse-on-surface">Fundação</h1>
+<p class="text-2xl font-bold text-blue dark:text-tertiary-container">Isaac Asimov</p>
+</div>
+<div class="flex gap-4 items-center">
+<div class="flex text-yellow">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined">star_half</span>
+</div>
+<span class="font-bold opacity-70 dark:text-inverse-on-surface">4.8 (2.4k avaliações)</span>
+</div>
+<p class="text-lg leading-relaxed dark:text-outline-variant">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8 border-t-2 border-on-background dark:border-inverse-on-surface/20">
+<div>
+<p class="text-xs uppercase font-black opacity-50 mb-1 dark:text-inverse-on-surface">Páginas</p>
+<p class="font-bold dark:text-inverse-on-surface">240</p>
+</div>
+<div>
+<p class="text-xs uppercase font-black opacity-50 mb-1 dark:text-inverse-on-surface">Idioma &amp; Origem</p>
+<p class="font-bold dark:text-inverse-on-surface">Português (Traduzido)</p>
+<p class="text-xs opacity-70 dark:text-outline-variant">Internacional (Inglês)</p>
+</div>
+<div>
+<p class="text-xs uppercase font-black opacity-50 mb-1 dark:text-inverse-on-surface">Ano</p>
+<p class="font-bold dark:text-inverse-on-surface">1951</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Related Recommendations -->
+<section class="max-w-6xl mx-auto mb-32 bg-blue/5 dark:bg-blue/10 p-12 border-2 border-on-background dark:border-inverse-on-surface/20 shadow-[8px_8px_0px_0px_rgba(80,101,255,1)]">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
+<div>
+<h2 class="text-4xl font-bold mb-2 dark:text-inverse-on-surface">Quem leu, também gostou</h2>
+<p class="text-blue dark:text-tertiary-container font-bold">Baseado nas suas preferências de Sci-Fi</p>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-gutter">
+<!-- Book Card 1 -->
+<div class="bk-card bg-surface dark:bg-on-background p-4 flex flex-col h-full group">
+<div class="book-icon-container bg-orange mb-4 border-2 border-black">
+<span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 1">book</span>
+</div>
+<h3 class="font-bold text-xl leading-tight mb-1 dark:text-inverse-on-surface">Duna</h3>
+<p class="text-sm opacity-70 mb-4 dark:text-outline-variant">Frank Herbert</p>
+<div class="mt-auto">
+<span class="text-xs font-black bg-blue text-white px-3 py-1 border-2 border-black uppercase">Space Opera</span>
+</div>
+</div>
+<!-- Book Card 2 -->
+<div class="bk-card bg-surface dark:bg-on-background p-4 flex flex-col h-full group">
+<div class="book-icon-container bg-blue mb-4 border-2 border-black">
+<span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 1">public</span>
+</div>
+<h3 class="font-bold text-xl leading-tight mb-1 dark:text-inverse-on-surface">O Problema dos Três Corpos</h3>
+<p class="text-sm opacity-70 mb-4 dark:text-outline-variant">Cixin Liu</p>
+<div class="mt-auto">
+<span class="text-xs font-black bg-orange text-white px-3 py-1 border-2 border-black uppercase">Hard Sci-Fi</span>
+</div>
+</div>
+<!-- Book Card 3 -->
+<div class="bk-card bg-surface dark:bg-on-background p-4 flex flex-col h-full group">
+<div class="book-icon-container bg-yellow mb-4 border-2 border-black">
+<span class="material-symbols-outlined text-black text-6xl" style="font-variation-settings: 'FILL' 1">memory</span>
+</div>
+<h3 class="font-bold text-xl leading-tight mb-1 dark:text-inverse-on-surface">Neuromancer</h3>
+<p class="text-sm opacity-70 mb-4 dark:text-outline-variant">William Gibson</p>
+<div class="mt-auto">
+<span class="text-xs font-black bg-blue text-white px-3 py-1 border-2 border-black uppercase">Cyberpunk</span>
+</div>
+</div>
+<!-- Book Card 4 -->
+<div class="bk-card bg-surface dark:bg-on-background p-4 flex flex-col h-full group">
+<div class="book-icon-container bg-orange mb-4 border-2 border-black">
+<span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 1">local_fire_department</span>
+</div>
+<h3 class="font-bold text-xl leading-tight mb-1 dark:text-inverse-on-surface">Fahrenheit 451</h3>
+<p class="text-sm opacity-70 mb-4 dark:text-outline-variant">Ray Bradbury</p>
+<div class="mt-auto">
+<span class="text-xs font-black bg-orange text-white px-3 py-1 border-2 border-black uppercase">Distopia</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Community Recommendations -->
+<section class="max-w-6xl mx-auto mb-32 p-12">
+<div class="mb-12">
+<h2 class="text-4xl font-bold mb-2 dark:text-inverse-on-surface">Recomendações da Comunidade</h2>
+<p class="text-on-surface-variant dark:text-outline-variant font-bold">Conexões entre páginas e telas</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="urec bg-surface dark:bg-on-background space-y-4">
+<h4 class="font-bold text-xl dark:text-inverse-on-surface">Fundação</h4>
+<p class="italic leading-relaxed text-lg dark:text-outline-variant">"Esse livro é perfeito para quem gostou da série Foundation da Apple TV+."</p>
+<p class="text-xs font-black opacity-50 dark:text-inverse-on-surface uppercase">Recomendado por @marcosscci</p>
+</div>
+<div class="urec bg-surface dark:bg-on-background space-y-4">
+<h4 class="font-bold text-xl dark:text-inverse-on-surface">Duna</h4>
+<p class="italic leading-relaxed text-lg dark:text-outline-variant">"Indispensável para quem ficou fascinado pela estética e política dos filmes de Denis Villeneuve."</p>
+<p class="text-xs font-black opacity-50 dark:text-inverse-on-surface uppercase">Recomendado por @ana_books</p>
+</div>
+</div>
+</section>
+<!-- Community Reviews -->
+<section class="max-w-6xl mx-auto bg-orange/5 dark:bg-primary/10 p-12 border-2 border-on-background dark:border-inverse-on-surface/20 shadow-[8px_8px_0px_0px_#fe4c00]">
+<div class="mb-12">
+<h2 class="text-4xl font-bold mb-2 dark:text-inverse-on-surface">Comentários da Comunidade</h2>
+<p class="text-on-surface-variant dark:text-outline-variant font-bold">O que os outros leitores estão dizendo</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Review Card 1 -->
+<div class="urec bg-surface dark:bg-on-background space-y-4">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-14 h-14 bg-blue rounded-full border-2 border-black flex items-center justify-center text-white font-black text-xl">AM</div>
+<div>
+<h4 class="font-bold text-xl leading-none dark:text-inverse-on-surface">Arthur M.</h4>
+<small class="text-xs opacity-50 uppercase font-black dark:text-outline-variant">Lido em Outubro 2023</small>
+</div>
+</div>
+<div class="flex text-yellow">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+</div>
+</div>
+<p class="italic leading-relaxed text-lg dark:text-outline-variant">"Uma obra-prima absoluta. A forma como Asimov constrói o conceito de psico-história é fascinante e ainda parece muito atual. É incrível como ele foca em grandes movimentos históricos em vez de personagens individuais."</p>
+<div class="flex gap-4 pt-2">
+<button class="flex items-center gap-2 text-sm font-black border-2 border-black px-4 py-2 bg-yellow hover:bg-yellow/80 transition-colors">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1">thumb_up</span> Útil (42)
+                    </button>
+</div>
+</div>
+<!-- Review Card 2 -->
+<div class="urec bg-surface dark:bg-on-background space-y-4">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-14 h-14 bg-orange rounded-full border-2 border-black flex items-center justify-center text-white font-black text-xl">CL</div>
+<div>
+<h4 class="font-bold text-xl leading-none dark:text-inverse-on-surface">Clara Lima</h4>
+<small class="text-xs opacity-50 uppercase font-black dark:text-outline-variant">Lido em Janeiro 2024</small>
+</div>
+</div>
+<div class="flex text-yellow">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined">star</span>
+</div>
+</div>
+<p class="italic leading-relaxed text-lg dark:text-outline-variant">"A leitura é bem rápida porque os contos são dinâmicos. No começo achei estranho os saltos temporais, mas depois você entende que o verdadeiro protagonista é a própria Fundação."</p>
+<div class="flex gap-4 pt-2">
+<button class="flex items-center gap-2 text-sm font-black border-2 border-black px-4 py-2 bg-yellow hover:bg-yellow/80 transition-colors">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1">thumb_up</span> Útil (18)
+                    </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-16 px-[5%] flex flex-col md:flex-row justify-between items-center gap-8 text-white border-t-4 border-black bg-orange">
+<div class="flex flex-col items-center md:items-start gap-4">
+<span class="text-4xl font-black italic tracking-tighter text-white">Litto</span>
+<p class="font-medium text-sm text-white/80">© 2026 Litto Book Club. Cultivando histórias com cores vibrantes.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-black text-sm uppercase text-white hover:underline transition-all" href="#">Sobre</a>
+<a class="font-black text-sm uppercase text-white hover:underline transition-all" href="#">Contato</a>
+</div>
+</footer>
+</body></html>
