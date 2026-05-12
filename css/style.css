@@ -1031,15 +1031,11 @@ body {
   text-decoration-color: var(--secondary);
   text-underline-offset: 6px;
   text-decoration-thickness: 3px;
+}
 
-  /* Footer nas telas Tailwind – espaço acima do bottom nav */
 #screen-explorar footer,
 #screen-bibliotecas-digitais footer,
 #screen-fundacao footer {
-  margin-bottom: 0;
-  border: 2px solid #000;
-  border-left: none;
-  border-right: none;
   padding-left: 5%;
   padding-right: 5%;
 }
