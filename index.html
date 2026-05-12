@@ -182,9 +182,14 @@
                 <p>R. Vergueiro, 1000 – Paraíso</p>
               </div>
             </div>
-            <button class="btn-primary" data-nav="mapa" style="margin-top:1.5rem;">
-              <span class="material-symbols-outlined" aria-hidden="true">map</span> Ver Mapa Completo
-            </button>
+           <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;">
+  <button class="btn-primary" data-nav="mapa">
+    <span class="material-symbols-outlined" aria-hidden="true">map</span> Mapa Presencial
+  </button>
+  <button class="btn-secondary" onclick="window.open('bibliotecas-digitais.html','_blank')">
+    <span class="material-symbols-outlined" aria-hidden="true">computer</span> Bibliotecas Digitais
+  </button>
+</div>
           </div>
           <div class="libraries-home-map" role="region" aria-label="Mapa de prévia das bibliotecas">
             <div id="map-home"></div>
