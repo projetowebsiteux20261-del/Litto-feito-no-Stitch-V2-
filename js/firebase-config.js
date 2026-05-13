@@ -9,20 +9,11 @@
 // 5. Em "Authentication" → "Método de login" → habilite "E-mail/senha"
 // ============================================================
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { initializeApp }  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth }        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore }   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { firebaseConfig } from "./firebase-config-values.js";
 
-const firebaseConfig = {
-  apiKey:            "AIzaSyCQQ-EqBv7XwmGX4FzIikMv4yd2UN_xKTc",
-  authDomain:        "litto-stitch.firebaseapp.com",
-  projectId:         "litto-stitch",
-  storageBucket:     "litto-stitch.firebasestorage.app",
-  messagingSenderId: "S420322820288",
-  appId:             "1:420322820288:web:a25fb17b7e6a9223126d25"
-};
-
-const app  = initializeApp(firebaseConfig);
+const app         = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-export const db = getFirestore(app);
+export const db   = getFirestore(app);
